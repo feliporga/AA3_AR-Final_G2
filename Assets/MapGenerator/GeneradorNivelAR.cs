@@ -99,21 +99,23 @@ namespace HerramientasAR.GeneradorProcedural
             Vector3 centro = plano.center;
 
             GameObject sueloInstanciado = Instantiate(prefabSuelo, centro, plano.transform.rotation);
-
             sueloInstanciado.transform.localScale = new Vector3(plano.size.x, 0.01f, plano.size.y);
             sueloInstanciado.AddComponent<ARAnchor>();
-
 
             float largoUtil = plano.size.y * 0.4f;
             float anchoUtil = plano.size.x * 0.4f;
 
             Vector3 posicionHoyo = centro + (plano.transform.forward * largoUtil);
 
-            Vector3 posicionBola = centro - (plano.transform.forward * largoUtil) + (Vector3.up * 0.05f);
+           
+            Vector3 posicionDispositivo = Camera.main.transform.position;
+
+           
+            Vector3 posicionBola = new Vector3(posicionDispositivo.x, centro.y + 0.05f, posicionDispositivo.z);
+          
 
             CrearObjetoAnclado(prefabFinal, posicionHoyo, Quaternion.identity);
             CrearObjetoAnclado(prefabPrincipio, posicionBola, Quaternion.identity);
-
 
             int numObstaculos = Mathf.Clamp(Mathf.FloorToInt(area * 1.5f), 1, ObstaculosMax);
             List<Vector3> posicionesOcupadas = new List<Vector3> { posicionHoyo, posicionBola };
