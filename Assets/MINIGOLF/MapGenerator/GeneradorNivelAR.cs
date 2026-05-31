@@ -98,25 +98,51 @@ namespace HerramientasAR.GeneradorProcedural
         {
             Vector3 centro = plano.center;
 
+            // 1. Instanciar el suelo
             GameObject sueloInstanciado = Instantiate(prefabSuelo, centro, plano.transform.rotation);
             sueloInstanciado.transform.localScale = new Vector3(plano.size.x, 0.01f, plano.size.y);
             sueloInstanciado.AddComponent<ARAnchor>();
 
+            // Límites seguros (40% del tamaño total desde el centro)
             float largoUtil = plano.size.y * 0.4f;
             float anchoUtil = plano.size.x * 0.4f;
 
+            // El hoyo se queda en el extremo "frontal" del plano
             Vector3 posicionHoyo = centro + (plano.transform.forward * largoUtil);
 
-           
+            // --- ¡AQUÍ ESTÁ LA CORRECCIÓN DEL BUG! ---
+            // 2. Calcular la posición de la bola de forma segura dentro del plano
             Vector3 posicionDispositivo = Camera.main.transform.position;
 
-           
-            Vector3 posicionBola = new Vector3(posicionDispositivo.x, centro.y + 0.05f, posicionDispositivo.z);
-          
+            // Conseguimos la dirección horizontal desde el centro del plano hacia el móvil
+            Vector3 direccionHaciaMovil = posicionDispositivo - centro;
+            direccionHaciaMovil.y = 0; // Aplanamos el vector en el eje vertical
+            direccionHaciaMovil.Normalize();
 
+            // Proyectamos esa dirección en los ejes locales del plano para no salirnos de los bordes
+            float componenteForward = Vector3.Dot(direccionHaciaMovil, plano.transform.forward);
+            float componenteRight = Vector3.Dot(direccionHaciaMovil, plano.transform.right);
+
+            // Limitamos los componentes para que no superen los metros útiles de la pista
+            componenteForward = Mathf.Clamp(componenteForward, -largoUtil, largoUtil);
+            componenteRight = Mathf.Clamp(componenteRight, -anchoUtil, anchoUtil);
+
+            // Si por alguna razón estás justo en el centro o da 0, la ponemos por defecto en el extremo opuesto al hoyo
+            if (Mathf.Approximately(componenteForward, 0) && Mathf.Approximately(componenteRight, 0))
+            {
+                componenteForward = -largoUtil;
+            }
+
+            // Calculamos la posición final sumando los desplazamientos seguros al centro del plano
+            Vector3 posicionBola = centro + (plano.transform.forward * componenteForward) + (plano.transform.right * componenteRight);
+            posicionBola.y = centro.y + 0.05f; // Un pelín por encima del suelo para que caiga bien
+                                               // ----------------------------------------
+
+            // 3. Spawnear elementos principales
             CrearObjetoAnclado(prefabFinal, posicionHoyo, Quaternion.identity);
             CrearObjetoAnclado(prefabPrincipio, posicionBola, Quaternion.identity);
 
+            // 4. Generar Obstáculos (El resto de tu lógica se queda igual)
             int numObstaculos = Mathf.Clamp(Mathf.FloorToInt(area * 1.5f), 1, ObstaculosMax);
             List<Vector3> posicionesOcupadas = new List<Vector3> { posicionHoyo, posicionBola };
 
