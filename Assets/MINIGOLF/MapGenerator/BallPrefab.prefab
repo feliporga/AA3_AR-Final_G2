@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 5290022672118228370}
   - component: {fileID: -7397285382615297014}
   m_Layer: 0
-  m_Name: PrefabInicioBola
+  m_Name: BallPrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,20 +280,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dfb46e2b97acae4282d8d934e67921f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuerzaGolpe: 4
+  hitForce: 2.5
   space: {fileID: 0}
   direction: {x: 0, y: 0, z: 1}
   putterVisual: {fileID: 0}
-  sonidoGolpe: {fileID: 8300000, guid: 01c925967e2c29a44bbfc9ea8c22fee2, type: 3}
-  volumenGolpe: 1
-  variacionPitchGolpe: 0.05
-  tiempoMinimoEntreGolpes: 0.2
-  sonidoRebote: {fileID: 8300000, guid: 63cc1b9d67aa41348a6a1c2fa9160308, type: 3}
-  volumenRebote: 0.7
-  variacionPitchRebote: 0.08
-  velocidadMinimaRebote: 0.4
-  tiempoMinimoEntreRebotes: 0.12
-  sonido3D: 1
+  hitSound: {fileID: 8300000, guid: 01c925967e2c29a44bbfc9ea8c22fee2, type: 3}
+  hitVolume: 1
+  hitPitchVariance: 0.05
+  minTimeBetweenHits: 0.2
+  bounceSound: {fileID: 8300000, guid: 01c925967e2c29a44bbfc9ea8c22fee2, type: 3}
+  bounceVolume: 0.7
+  bouncePitchVariance: 0.08
+  minBounceVelocity: 0.4
+  minTimeBetweenBounces: 0.12
+  useSpatialAudio: 1
 --- !u!1 &4399852542014283572
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8769824810468878033}
   - component: {fileID: 6071268352730617445}
   m_Layer: 0
-  m_Name: PrefabLimites
+  m_Name: ObstaclesPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

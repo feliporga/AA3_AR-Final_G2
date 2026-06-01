@@ -208,6 +208,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2512387469002778309, guid: 48cb3fb68c91eb94999fd99957eb0cae, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1624105744}
+    - targetCorrespondingSourceObject: {fileID: 2512387469002778309, guid: 48cb3fb68c91eb94999fd99957eb0cae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1624105751}
   m_SourcePrefab: {fileID: 100100000, guid: 48cb3fb68c91eb94999fd99957eb0cae, type: 3}
 --- !u!114 &331264286 stripped
 MonoBehaviour:
@@ -237,13 +240,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2fd9fc9f0f8f134797e57898db31a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabFinal: {fileID: 4102250141069033666, guid: 984544ae5d8d98f49a54f736dfe1c045, type: 3}
-  prefabPrincipio: {fileID: 2170581805044838415, guid: 9362b6c04c8a89240ad1550a58bedbb9, type: 3}
-  prefabObstaculo: {fileID: 7790544651892564030, guid: de121e75d9490da4caefaaf69228d3dd, type: 3}
-  prefabSuelo: {fileID: 5256752312951940010, guid: 368e44144a1bbdc4e91f0daa709b569e, type: 3}
-  ObstaculosMax: 6
-  botonAccion: {fileID: 1937833485}
-  textoBoton: {fileID: 1240742164}
+  holePrefab: {fileID: 4102250141069033666, guid: 984544ae5d8d98f49a54f736dfe1c045, type: 3}
+  ballPrefab: {fileID: 2170581805044838415, guid: 9362b6c04c8a89240ad1550a58bedbb9, type: 3}
+  obstaclePrefab: {fileID: 7790544651892564030, guid: de121e75d9490da4caefaaf69228d3dd, type: 3}
+  floorPrefab: {fileID: 5256752312951940010, guid: 368e44144a1bbdc4e91f0daa709b569e, type: 3}
+  maxObstacles: 6
+  actionButton: {fileID: 1937833485}
+  buttonText: {fileID: 1240742164}
 --- !u!114 &331264289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -865,8 +868,8 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 1
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -948,7 +951,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' '
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -975,8 +978,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1076,6 +1079,23 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1624105751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624105737}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15f82cc229284894964d2d30806969d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HumanSegmentationStencilMode: 3
+  m_HumanSegmentationDepthMode: 2
+  m_EnvironmentDepthMode: 0
+  m_EnvironmentDepthTemporalSmoothing: 0
+  m_OcclusionPreferenceMode: 1
 --- !u!1 &1750179110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,7 +1236,7 @@ GameObject:
   - component: {fileID: 1879619789}
   - component: {fileID: 1879619788}
   m_Layer: 0
-  m_Name: ManagerGiroscopio
+  m_Name: GyroManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1234,26 +1254,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7dac2dffb4ca6548810d64a63990b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visualizadorTexto: {fileID: 0}
-  AlGiroRapido:
+  debugText: {fileID: 0}
+  OnFastSpin:
     m_PersistentCalls:
       m_Calls: []
-  AlGiroLento:
+  OnSlowSpin:
     m_PersistentCalls:
       m_Calls: []
-  AlEstarQuieto:
+  OnIdle:
     m_PersistentCalls:
       m_Calls: []
-  AlAgitar:
+  OnShake:
     m_PersistentCalls:
       m_Calls: []
-  AlSaltar:
+  OnJump:
     m_PersistentCalls:
       m_Calls: []
-  umbralMinimo: 0.2
-  umbralRapido: 1.5
-  tiempoNecesarioShake: 0.4
-  umbralSaltar: 0.8
+  minThreshold: 0.2
+  fastThreshold: 1.5
+  requiredShakeTime: 0.4
+  jumpThreshold: 0.8
 --- !u!4 &1879619789
 Transform:
   m_ObjectHideFlags: 0
