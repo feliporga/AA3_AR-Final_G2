@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 4460193490541165061}
   - component: {fileID: 5033833013619984916}
   m_Layer: 0
-  m_Name: PrefabSuelo
+  m_Name: Floor&WallsPrefabe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
